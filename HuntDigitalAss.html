@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="HuntDigitalAss.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body >
+  <section id="front">
+    <div class="outerBox">
+        <div class="box">
+          <h1>Enter the data below</h1>
+          <table id="table">
+            <thead>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Month,Year</th>
+                <th>Dates Excluded</th>
+                <th>Number of Days</th>
+                <th>Lead Count</th>
+                <th>Expected DRR</th>
+                <th>Last Updated</th>
+            </thead>
+            <tbody id="form">
+                <td><input type="date" id="StartDate" name="startDate" onchange="updateEndDateMin()"></td>
+                <td><input type="date" id="EndDate" name="endDate" min="10" max="10" onchange="updateEndDateMax()"></td>
+                <td id="Month" >   --   </td>
+                <td id="NotDate"><input id="bNotDate" type="date"><br><button id="NotDateBut" onclick="addDate()">Exclude Date</button></td>
+                <td id="NumDays">--</td>
+                <td><input type="number" id="LeadCount"></td>
+                <td>--</td>
+                <td><button id="save" name="Save" type="submit" onclick="submitForm()">Save</button><button id="Cancel" onclick="cancel()"> Cancel</button></td>
+            </tbody>
+          </table>
+          <!--<label>Start Date: </label>
+          <input type="date">
+          <label>End Date: </label>
+          <input type="date"> -->
+        </div>
+    </div>
+  </section>
+<script src="HDjavaScript.js"></script>  
+</body>
+</html>
