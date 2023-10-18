@@ -26,10 +26,10 @@
             <tbody id="form">
                 <td><input type="date" id="StartDate" name="startDate" onchange="updateEndDateMin()"></td>
                 <td><input type="date" id="EndDate" name="endDate" min="10" max="10" onchange="updateEndDateMax()"></td>
-                <td id="Month" >   --   </td>
-                <td id="NotDate"><input id="bNotDate" type="date"><br><button id="NotDateBut" onclick="addDate()">Exclude Date</button></td>
+                <td id="Month" name="Month" >   --   </td>
+                <td id="NotDate"><input id="bNotDate" type="date" name="bNotDate"><br><button id="NotDateBut" onclick="addDate()">Exclude Date</button></td>
                 <td id="NumDays">--</td>
-                <td><input type="number" id="LeadCount"></td>
+                <td><input type="number" id="LeadCount" name="number"></td>
                 <td>--</td>
                 <td><button id="save" name="Save" type="submit" onclick="submitForm()">Save</button><button id="Cancel" onclick="cancel()"> Cancel</button></td>
             </tbody>

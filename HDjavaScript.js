@@ -8,14 +8,6 @@ var final = [months[res[1]-1],res[0]];
 return final;
 }
 
-/*function numOfDays(){
-    var date = document.getElementById("StartDate").value;
-    var date2 = document.getElementById("EndDate").value;
-    var res = date.split("-");
-    var res2 = date2.split("-");
-    return (res2[2]-res[2]);
-}*/
-
 
 var datesArray = [];
 
@@ -35,29 +27,31 @@ function numOfDays(){
     var daysDifference2 = daysDifference - datesArray.length;
     return daysDifference2;
 }
-/*<input type="date" id="notDates" name="notDates"></input> */
-/*<td id="NotDate"><button id="NotDateBut" onclick="addDate()">Add Date</button><p id="pNotDate"></p></td>*/
-/*function addDate(){
-    var input = document.createElement("input");
-    input.type = "date";
-    input.name = "dates[]"; // Use an array to store multiple dates
-    var br = document.createElement("br");
-    document.getElementById("pNotDate").appendChild(input);
-    document.getElementById("pNotDate").appendChild(br);
-    var i = 0;
-    datesArray[i] = input.value;
-    i++;
-}*/
+
+var Sdate = "";
+var Edate = "";
+var mont = "";
+var notD = [];
+var num = "";
+var LeadC = "";
+var Dr = "";
+var time = "";
+
 
 function submitForm(){
     var StartDate = document.getElementById("StartDate").value;
+    Sdate = StartDate;
     var EndDate = document.getElementById("EndDate").value;
+    Edate = EndDate;
     var month = getMonth();
+    mont = month;
 
-    /*var Notmonth = document.getElementById("notDates").value;*/
     var Days = numOfDays();
+    num = Days;
     var LeadCount = document.getElementById("LeadCount").value;
-    var Drr = LeadCount/Days;
+    LeadC = LeadCount;
+    var Drr = Math.floor(LeadCount/Days);
+    Dr = Drr; 
 
     var tr = document.createElement('tr');
 
@@ -77,6 +71,7 @@ function submitForm(){
     for(const ele of datesArray){
         des = des + ele + "<br>";
     };
+    notD = des;
     td4.innerHTML = des;
     td5.innerHTML = Days;
     td6.innerHTML = LeadCount;
@@ -85,6 +80,7 @@ function submitForm(){
     var nowDate2 = nowDate.toString();
     var nowDate3 = nowDate2.slice(0,25);
     td8.innerHTML = nowDate3;
+    time = nowDate3;
 
     document.getElementById("table").appendChild(tr);
     var len = datesArray.length
@@ -122,29 +118,36 @@ function updateEndDateMax() {
     max2.max = endDateInput.value;
 }
 
-/*$(document).ready(function(){
+$(document).ready(function(){
     $('#save').click(function(){
-        var StartDate = $('#StartDate').val();
-        var EndDate = $('#EndDate').val();
-        var month = $(getMonth()).val();
-        var Notdates = $(datesArray).val();
-        var Days = $(numOfDays()).val();
+        const tableData = [];
+        const rowData = {};
+        rowData['StartDate'] = Sdate;
+        rowData['EndDate'] = Edate;
+        rowData['Month'] = mont;
+        rowData['Excluded dates'] = notD;
+        rowData['Num Of Days'] = num;
+        rowData['Lead Count'] = LeadC;
+        rowData['Drr'] = Dr;
+        rowData['Submit Date'] = time;
+        tableData.push(rowData);
+        
+        const jsonData = JSON.stringify(tableData, null, 2);
+        console.log(jsonData);
 
-        var Days2 = numOfDays();
-        var LeadCount2 = document.getElementById("LeadCount").value;
-        var Drr = LeadCount/Days;
-        var LeadCount = $('#LeadCount').val();
-        var Drr2 = $(Drr).val();
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost:5500", true);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 
-        var nowDate = new Date();
-        var nowDate2 = nowDate.toString();
-        var nowDate3 = nowDate2.slice(0,25);
-        var nowDate4 = $(nowDate3).val();
+        xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+        
+          console.log("Data has been saved to the file.");
+         }
+        }; 
 
-        $.ajax({
-
-        })
+        xhr.send(jsonData);
     } )
 } )
-*/
+
 
